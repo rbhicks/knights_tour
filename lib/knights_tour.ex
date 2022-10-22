@@ -10,23 +10,23 @@ defmodule KnightsTour do
     |> tour_for_args
   end
 
-  def tour_for_args(%{help: true}) do
+  defp tour_for_args(%{help: true}) do
     display_help()
   end
 
-  def tour_for_args(%{start_x: start_x, start_y: start_y, rows: rows, columns: columns}) do
+  defp tour_for_args(%{start_x: start_x, start_y: start_y, rows: rows, columns: columns}) do
     find_tour_for_square({start_x, start_y}, rows, columns)
   end
   
-  def tour_for_args(%{rows: rows, columns: columns, all: true}) do
+  defp tour_for_args(%{rows: rows, columns: columns, all: true}) do
     find_tour_for_each_square(rows, columns)
   end
 
-  def tour_for_args(%{}) do
+  defp tour_for_args(%{}) do
     display_help()
   end
 
-  def display_help do
+  defp display_help do
     """
     
     Calculates a knight's tour on a user define board.
