@@ -5,7 +5,6 @@ defmodule KnightsTour do
   
   def main(args) do
     OptionParser.parse(args, strict: [start_x: :integer, start_y: :integer, rows: :integer, columns: :integer, all: :boolean, help: :boolean])
-    |> IO.inspect(limit: :infinity)
     |> elem(0)
     |> Enum.into(%{})
     |> tour_for_args
@@ -28,7 +27,29 @@ defmodule KnightsTour do
   end
 
   def display_help do
-    "help stuff" |> IO.puts
+    """
+    
+    Calculates a knight's tour on a user define board.
+    If one can be found it'll be displayed in an ascii
+    representation of the board with the the jumps
+    in the squares. N.B.: the jumps are 0 indexed.
+    
+    --rows <number of rows> (required)
+    --columns <number of columns> (required)
+    --all <true|false> defaults to false (optional).
+      if set to true it will try to find a tour
+      from each square (this is not optimized in terms
+      of orientation). If set to true, --start-x and
+      --start-y are not needed and ignored if
+      provided.
+    --start-x <0 indexed x coordinate of the tour start square>
+      (required if --all not set or false  
+    --start-y <0 indexed x coordinate of the tour start square>
+      (required if --all not set or false  
+    --help print this description
+    
+    """
+    |> IO.puts
   end
   
   def find_tour_for_each_square(rows, columns) do
@@ -41,7 +62,8 @@ defmodule KnightsTour do
       find_tour_for_square({x, y}, rows, columns)
     end
 
-    "seconds elapsed: #{DateTime.diff(DateTime.utc_now(), start_time)}" |> IO.puts()
+    "" |> IO.puts()
+    "total seconds elapsed: #{DateTime.diff(DateTime.utc_now(), start_time)}" |> IO.puts()
   end
 
   def find_tour_for_square({x, y}, rows, columns) do
