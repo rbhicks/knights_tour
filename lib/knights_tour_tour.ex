@@ -3,15 +3,15 @@ defmodule KnightsTour.Tour do
     tour([starting_square], [get_possible_moves(starting_square, rows, columns)], rows, columns)
   end
 
-  def tour(path, _possible_moves, rows, columns) when length(path) == rows * columns do
+  defp tour(path, _possible_moves, rows, columns) when length(path) == rows * columns do
     path |> Enum.reverse()
   end
 
-  def tour(_, [], _, _) do
+  defp tour(_, [], _, _) do
     nil
   end
 
-  def tour(
+  defp tour(
         [_head_path | tail_path],
         [[] | tail_possible_moves],
         rows,
@@ -20,7 +20,7 @@ defmodule KnightsTour.Tour do
     tour(tail_path, tail_possible_moves, rows, columns)
   end
 
-  def tour(
+  defp tour(
         path,
         [[head_head_possible_moves | tail_head_possible_moves] | tail_possible_moves],
         rows,
@@ -42,7 +42,7 @@ defmodule KnightsTour.Tour do
     tour(updated_path, updated_possible_moves, rows, columns)
   end
 
-  def get_possible_moves({x, y}, rows, columns) do
+  defp get_possible_moves({x, y}, rows, columns) do
     [
       {x + 2, y + 1},
       {x + 1, y + 2},
@@ -56,9 +56,9 @@ defmodule KnightsTour.Tour do
     |> Enum.filter(fn coordinates -> filter_impossible_moves(coordinates, rows, columns) end)
   end
 
-  def filter_impossible_moves({x, _y}, _rows, _columns) when x < 0, do: false
-  def filter_impossible_moves({x, _y}, _rows, columns) when x > columns - 1, do: false
-  def filter_impossible_moves({_x, y}, _rows, _columns) when y < 0, do: false
-  def filter_impossible_moves({_x, y}, rows, _columns) when y > rows - 1, do: false
-  def filter_impossible_moves(_, _, _), do: true
+  defp filter_impossible_moves({x, _y}, _rows, _columns) when x < 0, do: false
+  defp filter_impossible_moves({x, _y}, _rows, columns) when x > columns - 1, do: false
+  defp filter_impossible_moves({_x, y}, _rows, _columns) when y < 0, do: false
+  defp filter_impossible_moves({_x, y}, rows, _columns) when y > rows - 1, do: false
+  defp filter_impossible_moves(_, _, _), do: true
 end

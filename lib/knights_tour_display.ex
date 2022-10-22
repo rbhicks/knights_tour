@@ -30,11 +30,11 @@ defmodule KnightsTour.Display do
     (board_string_body <> "\n" <> board_string_horizontal_line) |> IO.puts()
   end
 
-  def add_square_to_board_string(_row, 0, formatted_move_number, board_string_horizontal_line) do
+  defp add_square_to_board_string(_row, 0, formatted_move_number, board_string_horizontal_line) do
     "\n#{board_string_horizontal_line}\n| #{formatted_move_number} |"
   end
 
-  def add_square_to_board_string(
+  defp add_square_to_board_string(
         _row,
         _column,
         formatted_move_number,
@@ -43,7 +43,7 @@ defmodule KnightsTour.Display do
     " #{formatted_move_number} |"
   end
 
-  def get_board_string_horizontal_line(rows, columns) do
+  defp get_board_string_horizontal_line(rows, columns) do
     max_number_length =
       (rows * columns)
       |> Integer.to_string()
@@ -54,7 +54,7 @@ defmodule KnightsTour.Display do
     String.duplicate("-", board_string_horizontal_line_length)
   end
 
-  def format_move_number(rows, columns, move_number) do
+  defp format_move_number(rows, columns, move_number) do
     max_length =
       (rows * columns)
       |> Integer.to_string()
