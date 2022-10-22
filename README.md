@@ -1,1 +1,1 @@
-A backtracking knight's tour in Elixir.
+A tail recursive backtracking knight's tour in Elixir.
